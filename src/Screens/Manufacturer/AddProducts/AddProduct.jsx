@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 
 const AddProduct = () => {
-    const [firstName, setfirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [emailId, setEmailId] = useState("");
-    const [mobileNo, setMobileNo] = useState("");
+    const [productName, setProductName] = useState("");
+    const [productDesc, setProductDesc] = useState("");
+    const [productPrice, setProductPrice] = useState("");
     const [fileName, setFileName] = useState("");
 	const [researchFile, setResearchFile] = useState(null);
 
@@ -37,8 +36,8 @@ const AddProduct = () => {
                                         id="productname"
                                         type="text"
                                         placeholder="Product"
-                                        value={firstName}
-                                        onChange={(e) => setfirstName(e.target.value.trim())}
+                                        value={productName}
+                                        onChange={(e) => setProductName(e.target.value.trim())}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>
@@ -56,14 +55,14 @@ const AddProduct = () => {
                                         id="productdesc"
                                         type="text"
                                         placeholder="Description"
-                                        value={firstName}
-                                        onChange={(e) => setfirstName(e.target.value.trim())}
+                                        value={productDesc}
+                                        onChange={(e) => setProductDesc(e.target.value.trim())}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>
                             </div>
 
-                            <div className="w-full">
+                            {/* <div className="w-full">
                                 <label
                                     htmlFor="name"
                                     className="block text-sm font-medium text-gray-700"
@@ -80,7 +79,7 @@ const AddProduct = () => {
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="w-full">
                                 <label
@@ -94,8 +93,8 @@ const AddProduct = () => {
                                         id="productprice"
                                         type="number"
                                         placeholder="Price"
-                                        value={firstName}
-                                        // onChange={(e) => setfirstName(e.target.value.trim())}
+                                        value={productPrice}
+                                        onChange={(e) => setProductPrice(e.target.value.trim())}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>
