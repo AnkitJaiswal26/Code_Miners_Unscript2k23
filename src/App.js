@@ -7,6 +7,7 @@ import MRegister from './Screens/Manufacturer/Register/MRegister';
 import Products from './Screens/Manufacturer/Products/Products';
 import AddProduct from './Screens/Manufacturer/AddProducts/AddProduct';
 import Footer from './Components/Footer/Footer';
+import Admin from './Screens/Admin/Admin';
 
 function App() {
   return (
@@ -15,11 +16,12 @@ function App() {
       Hello world!
     </h1> */}
     <Navbar/>
+    <Admin/>
     {/* <AddProduct/> */}
     {/* <Products/> */}
     {/* <BRegister/>
     <SRegister/> */}
-    <MRegister/>
+    {/* <MRegister/> */}
     <Footer/>
 
     </div>
