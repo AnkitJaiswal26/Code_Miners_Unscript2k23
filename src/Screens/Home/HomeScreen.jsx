@@ -1,9 +1,6 @@
-import { Box, Container, Typography } from "@mui/material";
 import Header from "./Header";
 import styles from "./HomeScreen.module.css";
-import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
-import PersonIcon from "@mui/icons-material/Person";
-import PublicIcon from "@mui/icons-material/Public";
+import { Box, Container, Typography } from "@mui/material";
 
 const HospitalD = [
 	"● Create new record for patient",
@@ -37,7 +34,7 @@ const HomeScreen = () => {
 				>
 					<Container maxWidth="sm">
 						<Typography variant="body">
-							Dr. DeAid 2023 &#169; - All Rights Reserved.
+							DecentraSupply 2023 &#169; - All Rights Reserved.
 						</Typography>
 					</Container>
 				</Box>
@@ -74,17 +71,15 @@ const HomeScreen = () => {
 			<Header />
 
 			<section className={`${styles.container} ${styles.hero}`}>
-				<h1>Reorganizing Healthcare</h1>
+				<h1>Enhancing the Supply Chain Ecosystem</h1>
 				<p>
 					<strong style={{ color: "#753bd9", fontSize: "20px" }}>
-						Dr. DeAid
+						DecentraSupply's
 					</strong>{" "}
-					is designed to bring out a healthcare revolution by
-					providing platform for people, Doctors, Hospitals, Medtech,
-					Healthtech Orgnizations where all the medical data can be
-					stored and accesed and used for the patients benefit as and
-					when required but maintaining the privacy of the patient and
-					ill use of their data.
+					goal is to leverage blockchain technology to
+					create a more secure, efficient, and transparent supply chain system. The solution should
+					allow for real-time tracking of products, verifiable information about the origin and quality
+					of products, and secure, tamper-proof records of transactions.
 				</p>
 				<CustomButton text="get started now" />
 			</section>
@@ -99,7 +94,7 @@ const HomeScreen = () => {
 					>
 						Key Features
 					</button>
-					<h3>what is Dr. DeAid ?</h3>
+					<h3>what is DecentraSupply ?</h3>
 					<p>
 						Our application provides a central repository of data
 						comprising all the tests and other medical processes a
@@ -113,31 +108,31 @@ const HomeScreen = () => {
 					</p>
 					<div className={`${styles.row} ${styles.features__flex}`}>
 						<FeatureCard
-							icon={
-								<LocalHospitalIcon
-									sx={{ color: "#753bd9", fontSize: "80px" }}
-								/>
-							}
+							// icon={
+							// 	<LocalHospitalIcon
+							// 		sx={{ color: "#753bd9", fontSize: "80px" }}
+							// 	/>
+							// }
 							name="Hospital"
 							text={HospitalD}
 							url="/hospital/dashbord"
 						/>
 						<FeatureCard
-							icon={
-								<PersonIcon
-									sx={{ color: "#753bd9", fontSize: "80px" }}
-								/>
-							}
+							// icon={
+							// 	<PersonIcon
+							// 		sx={{ color: "#753bd9", fontSize: "80px" }}
+							// 	/>
+							// }
 							name="Patient"
 							text={UserD}
 							url="/user/profile"
 						/>
 						<FeatureCard
-							icon={
-								<PublicIcon
-									sx={{ color: "#753bd9", fontSize: "80px" }}
-								/>
-							}
+							// icon={
+							// 	<PublicIcon
+							// 		sx={{ color: "#753bd9", fontSize: "80px" }}
+							// 	/>
+							// }
 							name="Orgnization"
 							text={OrgD}
 							url="/org/profile"

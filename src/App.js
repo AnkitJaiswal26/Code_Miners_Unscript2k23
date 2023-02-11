@@ -13,6 +13,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Admin from "./Screens/Admin/Admin";
 import ProductList from "./Screens/Seller/Products/ProductList";
 import Purchase from "./Screens/Manufacturer/CurrentPurchase/Purchase";
+import HomeScreen from "./Screens/Home/HomeScreen";
 
 function App() {
 	const router = createBrowserRouter([
@@ -20,7 +21,7 @@ function App() {
 			path: "/",
 			element: (
 				<>
-					<Home />
+					<HomeScreen/>
 				</>
 			),
 		},
