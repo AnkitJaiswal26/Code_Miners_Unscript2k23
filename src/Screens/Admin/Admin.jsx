@@ -224,11 +224,9 @@ const Admin = () => {
 										Company Name
 									</span>
 									<span className={styles.docCardContent}>
-										Company Identification Number
+										Email Id
 									</span>
-									<span className={styles.docCardContent}>
-										Category
-									</span>
+
 									<span className={styles.docCardContent}>
 										Verify
 									</span>

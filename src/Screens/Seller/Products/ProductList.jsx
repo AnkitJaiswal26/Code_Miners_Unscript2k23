@@ -73,12 +73,18 @@ const ProductList = () => {
 					const compData = await fetchCompanyDetails(nfts[i]);
 
 					res.push({
+						nft: nfts[i],
 						name: result[j].name,
 						comp: compData,
 						count: count,
 						productId: result[j].productId,
 						price: result[j].price,
+						description: result[j].description,
 					});
+
+					console.log("---------------------");
+					console.log(nfts[i]);
+					console.log("---------------------");
 				}
 		}
 		setProducts(res);
@@ -182,10 +188,7 @@ const ProductList = () => {
 												{item.name}
 											</div>
 											<p class="text-gray-700 text-base mb-2">
-												Wireless Neckband with 10mm
-												Drivers, Upto 8Hrs Uninterrupted
-												Music, Made in India, Ergonomic
-												and comfortable.
+												{item.description}
 											</p>
 											<p class="font-bold text-lg mb-2">
 												Price: {item.price.toNumber()}
@@ -198,30 +201,6 @@ const ProductList = () => {
 											</p>
 										</div>
 										<div className="flex mt-2 justify-around ">
-											<div className="text-xl font-medium">
-												<button
-													className="px-2 py-2"
-													onClick={(e) =>
-														setBuyCount(
-															buyCount - 1
-														)
-													}
-												>
-													-
-												</button>
-												{buyCount}
-												<button
-													className="px-2 py-2"
-													onClick={(e) =>
-														setBuyCount(
-															buyCount + 1
-														)
-													}
-												>
-													+
-												</button>
-											</div>
-
 											<button
 												type="button"
 												className="mb-6 inline-block px-16 py-3 text-white font-medium text-base leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
@@ -229,11 +208,9 @@ const ProductList = () => {
 													backgroundColor: "#22a6c7",
 												}}
 												onClick={(e) => {
-													buyProductItems(
-														e,
-														item.productId,
-														item.price,
-														item.compData
+													// console.log(item);
+													navigate(
+														`/seller/${item.nft}/${item.productId}`
 													);
 												}}
 											>

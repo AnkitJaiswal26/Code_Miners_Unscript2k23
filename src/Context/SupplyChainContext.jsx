@@ -355,9 +355,9 @@ export const SupplyChainProvider = ({ children }) => {
 		return data;
 	};
 
-	const scanAndGrow = async (contractAddress, pubKey, tokenURI) => {
+	const scanAndGrow = async (contractAddress, pubKey, tokenURI, state) => {
 		const contract = await connectingWithCompanyNFT(contractAddress);
-		const data = await contract.scanAndGrow(pubKey, tokenURI);
+		const data = await contract.scanAndGrow(pubKey, tokenURI, state);
 		return data;
 	};
 
