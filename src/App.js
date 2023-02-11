@@ -14,6 +14,7 @@ import Admin from "./Screens/Admin/Admin";
 import ProductList from "./Screens/Seller/Products/ProductList";
 import Purchase from "./Screens/Manufacturer/CurrentPurchase/Purchase";
 import HomeScreen from "./Screens/Home/HomeScreen";
+import AddProductItem from "./Screens/Manufacturer/AddProductItem/AddProductItem";
 
 function App() {
 	const router = createBrowserRouter([
@@ -21,7 +22,7 @@ function App() {
 			path: "/",
 			element: (
 				<>
-					<HomeScreen/>
+					<HomeScreen />
 				</>
 			),
 		},
@@ -67,6 +68,15 @@ function App() {
 				<>
 					<Navbar />
 					<Products />
+				</>
+			),
+		},
+		{
+			path: "/addItems/:address/:id",
+			element: (
+				<>
+					<Navbar />
+					<AddProductItem />
 				</>
 			),
 		},

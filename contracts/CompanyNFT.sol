@@ -8,7 +8,6 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 contract CompanyNFT is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    Counters.Counter private _itemsSold;
 
     mapping(uint256 => string[]) itemsHistory;
     enum State {
@@ -27,6 +26,8 @@ contract CompanyNFT is ERC721URIStorage {
         string name;
         uint256 price;
         address company;
+        string description;
+        string cid;
     }
 
     struct ProductItem {
@@ -69,12 +70,19 @@ contract CompanyNFT is ERC721URIStorage {
         cin = _cin;
     }
 
-    function addProduct(string memory name, uint256 price) public {
+    function addProduct(
+        string memory name,
+        uint256 price,
+        string memory description,
+        string memory cid
+    ) public {
         productsMapping[productCount++] = Product(
             productCount,
             name,
             price,
-            msg.sender
+            msg.sender,
+            description,
+            cid
         );
     }
 
@@ -220,18 +228,18 @@ contract CompanyNFT is ERC721URIStorage {
         );
     }
 
-    function transferNFT(
-        uint256 itemId,
-        address to,
-        string memory tokenURI
-    ) public {
-        if (items[itemId].ownerID == msg.sender) {
-            items[itemId].ownerID = payable(to);
-            items[itemId].cid = tokenURI;
-        }
+    // function transferNFT(
+    //     uint256 itemId,
+    //     address to,
+    //     string memory tokenURI
+    // ) public {
+    //     if (items[itemId].ownerID == msg.sender) {
+    //         items[itemId].ownerID = payable(to);
+    //         items[itemId].cid = tokenURI;
+    //     }
 
-        _setTokenURI(itemId, tokenURI);
-    }
+    //     _setTokenURI(itemId, tokenURI);
+    // }
 
     function fetchAllProducts() public view returns (Product[] memory) {
         Product[] memory result = new Product[](productCount);
@@ -244,36 +252,36 @@ contract CompanyNFT is ERC721URIStorage {
         return result;
     }
 
-    function fetchAllProductItemsByProductIdForUser(
-        uint256 productId
-    ) public view returns (ProductItem[] memory) {
-        uint256 totalCount = _tokenIds.current();
+    // function fetchAllProductItemsByProductIdForUser(
+    //     uint256 productId
+    // ) public view returns (ProductItem[] memory) {
+    //     uint256 totalCount = _tokenIds.current();
 
-        uint256 proCount;
-        for (uint256 i = 0; i < totalCount; i++) {
-            if (
-                items[i].productID == productId &&
-                items[i].itemState == State.SellerRecieved
-            ) {
-                proCount += 1;
-            }
-        }
+    //     uint256 proCount;
+    //     for (uint256 i = 0; i < totalCount; i++) {
+    //         if (
+    //             items[i].productID == productId &&
+    //             items[i].itemState == State.SellerRecieved
+    //         ) {
+    //             proCount += 1;
+    //         }
+    //     }
 
-        ProductItem[] memory result = new ProductItem[](proCount);
-        proCount = 0;
+    //     ProductItem[] memory result = new ProductItem[](proCount);
+    //     proCount = 0;
 
-        for (uint256 i = 0; i < totalCount; i++) {
-            if (
-                items[i].productID == productId &&
-                items[i].itemState == State.SellerRecieved
-            ) {
-                ProductItem storage cur = items[i];
-                result[proCount++] = cur;
-            }
-        }
+    //     for (uint256 i = 0; i < totalCount; i++) {
+    //         if (
+    //             items[i].productID == productId &&
+    //             items[i].itemState == State.SellerRecieved
+    //         ) {
+    //             ProductItem storage cur = items[i];
+    //             result[proCount++] = cur;
+    //         }
+    //     }
 
-        return result;
-    }
+    //     return result;
+    // }
 
     function fetchAllUserProducts() public view returns (ProductItem[] memory) {
         uint256 totalCount = _tokenIds.current();
@@ -317,6 +325,10 @@ contract CompanyNFT is ERC721URIStorage {
             privateKeyToProductItemMapping[
                 pubKeyToPrivateKeyMapping[publicKey]
             ];
+    }
+
+    function fetchProductById(uint256 id) public view returns (Product memory) {
+        return productsMapping[id];
     }
 
     function fetchAllProductItemsById(

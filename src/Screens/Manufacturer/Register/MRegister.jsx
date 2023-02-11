@@ -26,7 +26,7 @@ const MRegister = () => {
 		try {
 			const company = await fetchCompanyByAddress(currentAccount);
 			if (company.cin !== "") {
-				navigate("/companyDashboard");
+				navigate("/products");
 			}
 		} catch (err) {}
 	});

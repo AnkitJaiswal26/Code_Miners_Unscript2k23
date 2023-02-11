@@ -31,6 +31,7 @@ const AddProduct = () => {
 		fetchAllProductItemsByProductId,
 		fetchAllProducts,
 		addProduct,
+		uploadFilesToIPFS,
 	} = useSupplyChainContext();
 
 	const fetchUser = useCallback(async () => {
@@ -85,7 +86,15 @@ const AddProduct = () => {
 		e.preventDefault();
 		console.log("Adding....");
 		try {
-			await addProduct(companyNFTAdd, productName, productPrice);
+			const file = [new File(researchFile, "file.png")];
+			const cid = await uploadFilesToIPFS(file);
+			await addProduct(
+				companyNFTAdd,
+				productName,
+				productPrice,
+				productDesc,
+				cid
+			);
 			console.log("Product Added :)");
 		} catch (err) {
 			console.log(err);

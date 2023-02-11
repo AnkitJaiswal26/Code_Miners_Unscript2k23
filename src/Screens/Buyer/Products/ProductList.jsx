@@ -16,7 +16,7 @@ const ProductList = () => {
 
 	const [companyNFTAdd, setCompanyNFTAdd] = useState("");
 
-	const [sellerData, setSellerData] = useState();
+	const [userData, setUserData] = useState();
 
 	const [quantity, setQuantity] = useState(0);
 
@@ -34,12 +34,13 @@ const ProductList = () => {
 		fetchAllProducts,
 		fetchAllCompaniesNFT,
 		fetchCompanyDetails,
+		fetchUserByAddress,
 	} = useSupplyChainContext();
 
 	const fetchUser = useCallback(async () => {
 		try {
-			const seller = await fetchSellerByAddress(currentAccount);
-			setSellerData(seller);
+			const seller = await fetchUserByAddress(currentAccount);
+			setUserData(seller);
 		} catch (err) {
 			console.log(err);
 		}
@@ -97,13 +98,6 @@ const ProductList = () => {
 		context.drawImage(img, 0, 0, width, height);
 		context.font = "28px Arial";
 		context.fillStyle = "red";
-		// context.fillText(entry.productDetails.name, 300, 225);
-		// context.fillText(entry.compData.name, 300, 272);
-		// context.fillText(entry.compData.cin, 300, 318);
-		// context.fillText(`₹${entry.productDetails.price.toNumber()}`, 300, 364);
-		// context.fillText(entry.manufDate, 300, 414);
-		// context.fillText(entry.expiryDate, 300, 460);
-		// context.fillText(`${entry.validity} years`, 360, 740);
 	};
 
 	const buyProductItems = async (e, productId, price, compData) => {
@@ -247,11 +241,7 @@ const ProductList = () => {
 													return (
 														<ProductCanvas
 															key={index}
-															entry={
-																{
-																	// productDetails: productDetails,
-																}
-															}
+															entry={{}}
 															draw={draw}
 															height={900}
 															width={700}

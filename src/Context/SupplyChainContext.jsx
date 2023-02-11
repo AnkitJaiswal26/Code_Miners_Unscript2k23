@@ -211,9 +211,15 @@ export const SupplyChainProvider = ({ children }) => {
 		return company;
 	};
 
-	const addProduct = async (contractAddress, name, price) => {
+	const addProduct = async (
+		contractAddress,
+		name,
+		price,
+		productDesc,
+		cid
+	) => {
 		const contract = await connectingWithCompanyNFT(contractAddress);
-		await contract.addProduct(name, price);
+		await contract.addProduct(name, price, productDesc, cid);
 	};
 
 	// const mint = async (
@@ -343,9 +349,23 @@ export const SupplyChainProvider = ({ children }) => {
 		return data;
 	};
 
+	const buyProduct = async (contractAddress, privateKey, cid) => {
+		const contract = await connectingWithCompanyNFT(contractAddress);
+		const data = await contract.buyProduct(privateKey, cid);
+		return data;
+	};
+
+	const scanAndGrow = async (contractAddress, pubKey, tokenURI) => {
+		const contract = await connectingWithCompanyNFT(contractAddress);
+		const data = await contract.scanAndGrow(pubKey, tokenURI);
+		return data;
+	};
+
 	return (
 		<SupplyChainContext.Provider
 			value={{
+				scanAndGrow,
+				buyProduct,
 				buyBulkProductsForSeller,
 				fetchCompanyDetails,
 				fetchAllCompaniesNFT,
