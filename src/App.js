@@ -41,6 +41,15 @@ function App() {
 			),
 		},
 		{
+			path: "/company/addProduct",
+			element: (
+				<>
+					<Navbar />
+					<AddProduct />
+				</>
+			),
+		},
+		{
 			path: "/registerSeller",
 			element: (
 				<>
