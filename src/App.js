@@ -11,6 +11,8 @@ import { RouterProvider } from "react-router";
 import Home from "./Screens/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
 import Admin from "./Screens/Admin/Admin";
+import ProductList from "./Screens/Seller/Products/ProductList";
+import Purchase from "./Screens/Manufacturer/CurrentPurchase/Purchase";
 
 function App() {
 	const router = createBrowserRouter([
@@ -59,11 +61,20 @@ function App() {
 			),
 		},
 		{
-			path: "/productsList",
+			path: "/products",
 			element: (
 				<>
 					<Navbar />
 					<Products />
+				</>
+			),
+		},
+		{
+			path: "/productList",
+			element: (
+				<>
+					<Navbar />
+					<ProductList />
 				</>
 			),
 		},
@@ -73,6 +84,15 @@ function App() {
 				<>
 					<Navbar />
 					<Admin />
+				</>
+			),
+		},
+		{
+			path: "/purchased",
+			element: (
+				<>
+					<Navbar />
+					<Purchase />
 				</>
 			),
 		},
