@@ -318,12 +318,36 @@ export const SupplyChainProvider = ({ children }) => {
 	const fetchAllCompaniesNFT = async () => {
 		const contract = await connectingWithSmartContract();
 		const data = await contract.fetchAllCompaniesNFT();
+		console.log(data);
+		return data;
+	};
+
+	const fetchCompanyDetails = async (contractAddress) => {
+		const contract = await connectingWithCompanyNFT(contractAddress);
+		const data = await contract.fetchCompanyDetails();
+		return data;
+	};
+
+	const buyBulkProductsForSeller = async (
+		contractAddress,
+		productId,
+		count,
+		cids
+	) => {
+		const contract = await connectingWithCompanyNFT(contractAddress);
+		const data = await contract.buyBulkProductsForSeller(
+			productId,
+			count,
+			cids
+		);
 		return data;
 	};
 
 	return (
 		<SupplyChainContext.Provider
 			value={{
+				buyBulkProductsForSeller,
+				fetchCompanyDetails,
 				fetchAllCompaniesNFT,
 				connectingWithSmartContract,
 				fetchUserByAddress,

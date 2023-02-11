@@ -71,7 +71,7 @@ function App() {
 			),
 		},
 		{
-			path: "/productList",
+			path: "/productsList",
 			element: (
 				<>
 					<Navbar />
