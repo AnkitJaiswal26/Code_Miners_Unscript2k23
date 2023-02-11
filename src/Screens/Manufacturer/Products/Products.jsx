@@ -210,6 +210,13 @@ const Products = () => {
 										/>
 										<button
 											type="button"
+											onClick={(e) =>
+												addNewItems(
+													e,
+													item.productId,
+													item.price
+												)
+											}
 											className="mb-6 inline-block px-16 py-3 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
 											style={{
 												backgroundColor: "#22a6c7",
