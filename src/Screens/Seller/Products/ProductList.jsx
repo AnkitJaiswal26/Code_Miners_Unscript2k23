@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React,{useState} from 'react';
+import ProductCard from '../../../Components/ProductCard/ProductCard';
 
-const ProductCard = () => {
+const ProductList = () => {
+    const [buyCount, setBuyCount] = useState(0);
 
     return (
-        <div class="mx-10 my-5">
+        <div style={{margin: "auto", justifyContent: "space-around"}}>
+            <div className="">
+                <div className="text-center text-2xl font-bold mt-4 mb-2">Previous Jobs</div>
+                <div style={{display:"flex",flexWrap: "wrap",flexBasis:"1/3",justifyContent:"center" }}>
+                <div class="mx-10 my-5">
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
                 <img src="/logo192.png" alt="Logo" style={{ margin: "auto" }} />;
                 <div class="px-6 py-4">
@@ -38,7 +44,10 @@ const ProductCard = () => {
 
             </div>
         </div>
+                </div>
+            </div>
+        </div>
     )
 }
 
-export default ProductCard
+export default ProductList
