@@ -59,7 +59,7 @@ function App() {
 			),
 		},
 		{
-			path: "/productlList",
+			path: "/productsList",
 			element: (
 				<>
 					<Navbar />
@@ -68,15 +68,14 @@ function App() {
 			),
 		},
 		{
-
 			path: "/admin",
 			element: (
 				<>
 					<Navbar />
 					<Admin />
 				</>
-			)
-		}
+			),
+		},
 	]);
 
 	return (

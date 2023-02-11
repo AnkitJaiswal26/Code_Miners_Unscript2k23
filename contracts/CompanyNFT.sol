@@ -327,4 +327,29 @@ contract CompanyNFT is ERC721URIStorage {
                 pubKeyToPrivateKeyMapping[publicKey]
             ];
     }
+
+    function fetchAllProductItemsById(
+        uint256 productId
+    ) public view returns (ProductItem[] memory) {
+        uint256 totalCount = _tokenIds.current();
+
+        uint256 proCount;
+        for (uint256 i = 0; i < totalCount; i++) {
+            if (items[i].productID == productId) {
+                proCount += 1;
+            }
+        }
+
+        ProductItem[] memory result = new ProductItem[](proCount);
+        proCount = 0;
+
+        for (uint256 i = 0; i < totalCount; i++) {
+            if (items[i].productID == productId) {
+                ProductItem storage cur = items[i];
+                result[proCount++] = cur;
+            }
+        }
+
+        return result;
+    }
 }

@@ -238,31 +238,35 @@ export const SupplyChainProvider = ({ children }) => {
 	// 	);
 	// };
 
-	// const addBulkProducts = async (
-	// 	contractAddress,
-	// 	productId,
-	// 	pubKeys,
-	// 	privateKeys,
-	// 	manDate,
-	// 	exDate,
-	// 	tokenURI,
-	// 	validity
-	// ) => {
-	// 	const contract = await connectingWithCompanyNFT(contractAddress);
-	// 	await contract.addBulkProducts(
-	// 		productId,
-	// 		pubKeys,
-	// 		privateKeys,
-	// 		manDate,
-	// 		exDate,
-	// 		tokenURI,
-	// 		validity
-	// 	);
-	// };
+	const addBulkProducts = async (
+		contractAddress,
+		productId,
+		qualities,
+		price,
+		pubKeys,
+		privateKeys,
+		tokenURI
+	) => {
+		const contract = await connectingWithCompanyNFT(contractAddress);
+		await contract.addBulkProducts(
+			productId,
+			qualities,
+			price,
+			pubKeys,
+			privateKeys,
+			tokenURI
+		);
+	};
 
 	const fetchProductById = async (contractAddress, productId) => {
 		const contract = await connectingWithCompanyNFT(contractAddress);
 		const data = await contract.fetchProductById(productId);
+		return data;
+	};
+
+	const fetchAllProducts = async (contractAddress) => {
+		const contract = await connectingWithCompanyNFT(contractAddress);
+		const data = await contract.fetchAllProducts();
 		return data;
 	};
 
@@ -339,6 +343,8 @@ export const SupplyChainProvider = ({ children }) => {
 				acceptSeller,
 				fetchSellerByAddress,
 				rejectSeller,
+				fetchAllProducts,
+				addBulkProducts,
 			}}
 		>
 			{children}
