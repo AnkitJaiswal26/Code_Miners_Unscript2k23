@@ -294,6 +294,12 @@ export const SupplyChainProvider = ({ children }) => {
 		return data;
 	};
 
+	const fetchProductItemsByProductId = async (contractAddress, productId) => {
+		const contract = await connectingWithCompanyNFT(contractAddress);
+		const data = await contract.fetchAllProductItemsById(productId);
+		return data;
+	};
+
 	const fetchProductItemByPublicKey = async (contractAddress, publicKey) => {
 		const contract = await connectingWithCompanyNFT(contractAddress);
 		const data = await contract.fetchProductItemByPublicKey(publicKey);
@@ -345,6 +351,7 @@ export const SupplyChainProvider = ({ children }) => {
 				rejectSeller,
 				fetchAllProducts,
 				addBulkProducts,
+				fetchProductItemsByProductId,
 			}}
 		>
 			{children}

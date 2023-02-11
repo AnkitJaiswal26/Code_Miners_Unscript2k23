@@ -22,15 +22,6 @@ contract CompanyNFT is ERC721URIStorage {
         Received // 6
     }
 
-    event Harvested(uint256 upc);
-    event Processed(uint256 upc);
-    event Packed(uint256 upc);
-    event ForSale(uint256 upc);
-    event Sold(uint256 upc);
-    event Shipped(uint256 upc);
-    event Received(uint256 upc);
-    event Purchased(uint256 upc);
-
     struct Product {
         uint256 productId;
         string name;
