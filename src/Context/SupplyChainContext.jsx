@@ -113,11 +113,16 @@ export const SupplyChainProvider = ({ children }) => {
 		}
 	};
 
-	const registerSeller = async (comAdd, name, cin) => {
+	const registerSeller = async (sellerAdd, sellerName, mobileNo, email) => {
 		const contract = await connectingWithSmartContract();
 		if (currentAccount) {
-			const company = await contract.registerSeller(comAdd, name, cin);
-			console.log(company);
+			const seller = await contract.registerSeller(
+				sellerAdd,
+				sellerName,
+				mobileNo,
+				email
+			);
+			console.log(seller);
 		}
 	};
 
@@ -294,6 +299,7 @@ export const SupplyChainProvider = ({ children }) => {
 				fetchProductItemByPrivateKey,
 				fetchProductItemByPublicKey,
 				uploadFilesToIPFS,
+				registerSeller,
 			}}
 		>
 			{children}
