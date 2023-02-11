@@ -17,6 +17,7 @@ import HomeScreen from "./Screens/Home/HomeScreen";
 import AddProductItem from "./Screens/Manufacturer/AddProductItem/AddProductItem";
 import AddProductItemForSeller from "./Screens/Seller/AddProductItemForSeller/AddProductItem";
 import VerifyPage from "./Screens/Buyer/Verify/Verify";
+import Redeem from "./Screens/Buyer/Redeem/Redeem";
 
 function App() {
 	const router = createBrowserRouter([
@@ -71,6 +72,16 @@ function App() {
 				<>
 					<Navbar />
 					<AddProductItemForSeller />
+				</>
+			),
+		},
+
+		{
+			path: "/buy/:nft/:id",
+			element: (
+				<>
+					<Navbar />
+					<Redeem />
 				</>
 			),
 		},
