@@ -6,19 +6,15 @@ import ProductCanvas from "../../Manufacturer/Products/ProductCanvas";
 import { useSupplyChainContext } from "../../../Context/SupplyChainContext";
 import { useAuth } from "../../../Context/AuthContext";
 // import ProductCanvas from "../ProductPage/ProductCanvas";
+import template from "../../../images/template.jpg";
 
 const Redeem = () => {
 	const { checkIfWalletConnected, currentAccount } = useAuth();
 	const [product, setProduct] = useState([]);
-	const [productName, setProductName] = useState("");
-	const [companyName, setCompanyName] = useState("");
-	const [state, setState] = useState(0);
-	const [cidOfCard, setCidOfCard] = useState("");
-
+	const [productItem, setProductItem] = useState([]);
 	useEffect(() => {
 		checkIfWalletConnected();
 		fetchProductItem();
-		checkStateOfProductItem();
 	}, []);
 
 	useEffect(() => {
@@ -35,7 +31,7 @@ const Redeem = () => {
 			setUser(user);
 			console.log(user);
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	});
 
@@ -70,61 +66,32 @@ const Redeem = () => {
 			console.log("ProductItem ID", id);
 
 			const data = await fetchProductItemById(companyNFTAddress, id);
-			console.log("Product ID", data.productId.toNumber());
+			console.log("Product ID", data.productID);
+
+			setProductItem(data);
 
 			const product = await fetchProductById(
 				companyNFTAddress,
-				data.productId.toNumber()
+				data.productID.toNumber()
 			);
 			console.log("product", product);
+			if (data.itemState === 7) setPurchased(true);
 
 			const company = await fetchCompanyByAddress(companyAddress);
 			console.log("company", company);
+			setCompData(company);
 
 			var productItem = {
-				productName: product.name,
+				name: product.name,
 				companyName: company.name,
 				cin: company.cin,
-				manDate: data.man_date,
-				exDate: data.ex_date,
+				price: product.price,
+				state: data.itemState,
+				owner: data.owner,
+				productId: product.productId,
 			};
 			setProduct(productItem);
 			console.log("data", productItem);
-		} catch (err) {
-			console.log(err);
-		}
-	});
-
-	const checkStateOfProductItem = useCallback(async () => {
-		try {
-			var companyAddress = window.location.pathname.split("/")[2];
-			var privateKey = window.location.pathname.split("/")[3];
-
-			const companyNFTAddress = await fetchCompanyNFTAddress(
-				companyAddress
-			);
-			console.log(companyAddress, "aa", companyNFTAddress);
-
-			const id = await fetchProductItemByPrivateKey(
-				companyNFTAddress,
-				privateKey
-			);
-			console.log("ProductItem ID", id);
-
-			const productItem = await fetchProductItemById(
-				companyNFTAddress,
-				id
-			);
-			console.log(productItem);
-			setCidOfCard(productItem.cid);
-
-			const data = await checkState(
-				companyNFTAddress,
-				productItem.pubKey
-			);
-			console.log("checkState", data.toNumber());
-			setState(parseInt(data));
-			return parseInt(data.toNumber());
 		} catch (err) {
 			console.log(err);
 		}
@@ -161,7 +128,6 @@ const Redeem = () => {
 			const cid = await uploadFilesToIPFS([file]);
 			console.log(cid);
 			await buyProduct(companyNFTAddress, privateKey, cid);
-			// (contractAddress, privateKey, tokenURI)
 			console.log("Product purchased and Private Key verified");
 		} catch (err) {
 			console.log(err);
@@ -169,26 +135,43 @@ const Redeem = () => {
 	});
 
 	const draw = async (context, entry, height, width) => {
+		console.log(entry);
 		var img = document.getElementById("templateImage");
 		context.drawImage(img, 0, 0, width, height);
 		context.font = "28px Arial";
 		context.fillStyle = "red";
-		context.fillText(user.name, 300, 598);
-
-		context.font = "15px Arial";
-		context.fillText(user.userAdd, 300, 555);
+		context.fillText(entry.compData.name, 300, 304);
+		context.fillText(entry.productDetails.productId, 300, 256);
+		context.fillText(entry.productDetails.name, 300, 207);
+		context.fillText(
+			entry.productDetails.price.toNumber().toString(),
+			300,
+			400
+		);
+		console.log(productItem);
+		context.fillText(currentAccount, 300, 447);
+		context.fillText(productItem.distributorAdd, 300, 493);
+		context.fillText(productItem.retailerAdd, 300, 546);
+		context.fillText(currentAccount, 300, 593);
+		context.fillText(productItem.itemState, 300, 643);
+		context.fillText(entry.compData.cin, 300, 351);
 	};
+	const [purchased, setPurchased] = useState(false);
+
+	const [nft, setNFT] = useState("");
+
+	const [compData, setCompData] = useState([]);
 
 	return (
 		<>
-			{state == 0 ? (
+			{purchased === false ? (
 				<div className={styles.verifyPageContainer}>
-					{product.productName ? (
+					{product.name ? (
 						<div className={styles.verifyContainer}>
 							<span className={styles.verifyDetails}>
 								Product Name:{" "}
 								<span className={styles.detailsContent}>
-									{product.productName}
+									{product.name}
 								</span>
 							</span>
 							<span className={styles.verifyDetails}>
@@ -224,7 +207,8 @@ const Redeem = () => {
 							<div className={styles.canvasContainer}>
 								<ProductCanvas
 									entry={{
-										product: product,
+										compData: compData,
+										productDetails: product,
 									}}
 									draw={draw}
 									height={900}
@@ -238,7 +222,7 @@ const Redeem = () => {
 								height={900}
 								width={700}
 								crossorigin="anonymous"
-								src={`https://${cidOfCard}.ipfs.w3s.link/warranty.png`}
+								src={template}
 							/>
 						</div>
 					) : (
