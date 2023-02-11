@@ -11,20 +11,20 @@ export default function Header() {
 			url: "/",
 		},
 		{
+			name: "About",
+			url: "/about",
+		},
+		{
 			name: "Manufacturer",
-			url: "/hospital/profile",
+			url: "/registerCompany",
 		},
 		{
 			name: "Seller",
-			url: "/hospital/profile",
-		},
-		{
-			name: "Seller",
-			url: "/hospital/profile",
+			url: "/registerSeller",
 		},
 		{
 			name: "Buyer",
-			url: "/user/profile",
+			url: "/register",
 		},
 	];
 

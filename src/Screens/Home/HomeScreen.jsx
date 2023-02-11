@@ -1,6 +1,9 @@
 import Header from "./Header";
 import styles from "./HomeScreen.module.css";
 import { Box, Container, Typography } from "@mui/material";
+import BusinessIcon from '@mui/icons-material/Business';
+import PersonIcon from '@mui/icons-material/Person';
+import FaceIcon from '@mui/icons-material/Face';
 
 const HospitalD = [
 	"● Create new record for patient",
@@ -96,46 +99,42 @@ const HomeScreen = () => {
 					</button>
 					<h3>what is DecentraSupply ?</h3>
 					<p>
-						Our application provides a central repository of data
-						comprising all the tests and other medical processes a
-						patient went through, it reduces the scope of
-						duplication of the same processes and thus prevents
-						delay in the treatment. This data of patients can be
-						used by hospitals to provide blood and other medical
-						services to needy patients. patients have the power to
-						provide their data to research organization so that they
-						can research and develop solutions to medical problems.
+						Our application provides a central repository of Lorem ipsum dolor sit amet 
+						consectetur adipisicing elit. Laudantium accusantium rerum asperiores 
+						consequuntur voluptate odio quae? Libero excepturi, facilis is distinctio 
+						vel voluptatum, perferendis iste eius fugit nostrum autem repellat dignissimos! distinctio 
+						vel voluptatum, perferendis iste eius fugit nostrum autem repellat dignissimos!
 					</p>
 					<div className={`${styles.row} ${styles.features__flex}`}>
 						<FeatureCard
-							// icon={
-							// 	<LocalHospitalIcon
-							// 		sx={{ color: "#753bd9", fontSize: "80px" }}
-							// 	/>
-							// }
-							name="Hospital"
+							icon={
+								<BusinessIcon
+									sx={{ color: "#753bd9", fontSize: "80px" }}
+								/>
+							}
+							name="Manufacturer"
 							text={HospitalD}
-							url="/hospital/dashbord"
+							url="/registerCompany"
 						/>
 						<FeatureCard
-							// icon={
-							// 	<PersonIcon
-							// 		sx={{ color: "#753bd9", fontSize: "80px" }}
-							// 	/>
-							// }
-							name="Patient"
+							icon={
+								<FaceIcon
+									sx={{ color: "#753bd9", fontSize: "80px" }}
+								/>
+							}
+							name="Seller"
 							text={UserD}
-							url="/user/profile"
+							url="/registerSeller"
 						/>
 						<FeatureCard
-							// icon={
-							// 	<PublicIcon
-							// 		sx={{ color: "#753bd9", fontSize: "80px" }}
-							// 	/>
-							// }
-							name="Orgnization"
+							icon={
+								<PersonIcon
+									sx={{ color: "#753bd9", fontSize: "80px" }}
+								/>
+							}
+							name="Buyer"
 							text={OrgD}
-							url="/org/profile"
+							url="/register"
 						/>
 					</div>
 				</div>

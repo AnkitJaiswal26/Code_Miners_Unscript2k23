@@ -8,7 +8,7 @@ import Products from "./Screens/Manufacturer/Products/Products";
 import AddProduct from "./Screens/Manufacturer/AddProducts/AddProduct";
 import Footer from "./Components/Footer/Footer";
 import { RouterProvider } from "react-router";
-import Home from "./Screens/Home/Home";
+// import Home from "./Screens/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
 import Admin from "./Screens/Admin/Admin";
 import ProductList from "./Screens/Seller/Products/ProductList";
