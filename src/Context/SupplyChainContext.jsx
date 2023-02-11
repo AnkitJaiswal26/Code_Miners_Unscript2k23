@@ -69,6 +69,13 @@ export const SupplyChainProvider = ({ children }) => {
 		}
 	};
 
+	const isOwnerAddress = async () => {
+		const contract = await connectingWithSmartContract();
+		const data = await contract.OwnerIs();
+		console.log(data);
+		return data;
+	};
+
 	const registerUser = async (
 		userAdd,
 		name,
@@ -140,6 +147,20 @@ export const SupplyChainProvider = ({ children }) => {
 		}
 	};
 
+	const acceptSeller = async (comAdd) => {
+		const contract = await connectingWithSmartContract();
+		if (currentAccount) {
+			await contract.acceptSeller(comAdd);
+		}
+	};
+
+	const rejectSeller = async (comAdd) => {
+		const contract = await connectingWithSmartContract();
+		if (currentAccount) {
+			await contract.rejectSeller(comAdd);
+		}
+	};
+
 	const fetchUserByAddress = async (userAddress) => {
 		const contract = await connectingWithSmartContract();
 		const user = await contract.fetchUserByAddress(userAddress);
@@ -153,9 +174,22 @@ export const SupplyChainProvider = ({ children }) => {
 		return company;
 	};
 
-	const fetchActiveRequests = async () => {
+	const fetchSellerByAddress = async (companyAddress) => {
 		const contract = await connectingWithSmartContract();
-		const requests = await contract.fetchActiveRequests();
+		const seller = await contract.fetchSellerByAddress(companyAddress);
+		console.log(seller);
+		return seller;
+	};
+
+	const fetchActiveCompanyRequests = async () => {
+		const contract = await connectingWithSmartContract();
+		const requests = await contract.fetchActiveCompanyRequests();
+		return requests;
+	};
+
+	const fetchActiveSellerRequests = async () => {
+		const contract = await connectingWithSmartContract();
+		const requests = await contract.fetchActiveSellerRequests();
 		return requests;
 	};
 
@@ -288,7 +322,7 @@ export const SupplyChainProvider = ({ children }) => {
 				acceptCompany,
 				rejectCompany,
 				fetchCompanyByAddress,
-				fetchActiveRequests,
+				fetchActiveCompanyRequests,
 				fetchAllCompanies,
 				fetchCompanyUsingCIN,
 				fetchCompanyNFTAddress,
@@ -300,6 +334,11 @@ export const SupplyChainProvider = ({ children }) => {
 				fetchProductItemByPublicKey,
 				uploadFilesToIPFS,
 				registerSeller,
+				isOwnerAddress,
+				fetchActiveSellerRequests,
+				acceptSeller,
+				fetchSellerByAddress,
+				rejectSeller,
 			}}
 		>
 			{children}

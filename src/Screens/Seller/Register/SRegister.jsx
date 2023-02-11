@@ -21,11 +21,11 @@ const SRegister = () => {
 		if (currentAccount) fetchUser();
 	}, [currentAccount]);
 
-	const { registerCompany, fetchCompanyByAddress } = useSupplyChainContext();
+	const { registerSeller, fetchSellerByAddress } = useSupplyChainContext();
 
 	const fetchUser = useCallback(async () => {
 		try {
-			const company = await fetchCompanyByAddress(currentAccount);
+			const company = await fetchSellerByAddress(currentAccount);
 			if (company.cin !== "") {
 				navigate("/companyDashboard");
 			}
@@ -42,7 +42,7 @@ const SRegister = () => {
 			} else {
 				setIsLoading(true);
 				console.log(currentAccount, sellerName, mobileNo, email);
-				await registerCompany(
+				await registerSeller(
 					currentAccount,
 					sellerName,
 					mobileNo,

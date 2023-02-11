@@ -203,7 +203,19 @@ contract SupplyChain {
         revert();
     }
 
-    function fetchActiveRequests()
+    function fetchSellerByAddress(
+        address sellerAdd
+    ) public view returns (Seller memory) {
+        for (uint256 i = 0; i < sellerCount; i++) {
+            if (sellerMapping[i].sellerAdd == sellerAdd) {
+                return sellerMapping[i];
+            }
+        }
+
+        revert();
+    }
+
+    function fetchActiveCompanyRequests()
         public
         view
         isOwner
@@ -212,6 +224,21 @@ contract SupplyChain {
         Company[] memory result = new Company[](companyRequestCount);
         for (uint256 i = 0; i < companyRequestCount; i++) {
             Company storage cur = companyRequestMapping[i];
+            result[i] = cur;
+        }
+
+        return result;
+    }
+
+    function fetchActiveSellerRequests()
+        public
+        view
+        isOwner
+        returns (Seller[] memory)
+    {
+        Seller[] memory result = new Seller[](sellerRequestCount);
+        for (uint256 i = 0; i < sellerRequestCount; i++) {
+            Seller storage cur = sellerRequestMapping[i];
             result[i] = cur;
         }
 
@@ -248,15 +275,15 @@ contract SupplyChain {
         revert();
     }
 
-    function fetchAllCompaniesNFT() public view returns (address[] memory) {
-        address[] memory result = new address[](companyCount);
-        for (uint256 i = 0; i < companyCount; i++) {
-            address cur = address(companyNFTMapping[i]);
-            result[i] = cur;
-        }
+    // function fetchAllCompaniesNFT() public view returns (address[] memory) {
+    //     address[] memory result = new address[](companyCount);
+    //     for (uint256 i = 0; i < companyCount; i++) {
+    //         address cur = address(companyNFTMapping[i]);
+    //         result[i] = cur;
+    //     }
 
-        return result;
-    }
+    //     return result;
+    // }
 
     function fetchCompanyNFTAddress(
         address companyAddr

@@ -10,6 +10,7 @@ import Footer from "./Components/Footer/Footer";
 import { RouterProvider } from "react-router";
 import Home from "./Screens/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
+import Admin from "./Screens/Admin/Admin";
 
 function App() {
 	const router = createBrowserRouter([
@@ -45,6 +46,15 @@ function App() {
 				<>
 					<Navbar />
 					<SRegister />
+				</>
+			),
+		},
+		{
+			path: "/admin",
+			element: (
+				<>
+					<Navbar />
+					<Admin />
 				</>
 			),
 		},
