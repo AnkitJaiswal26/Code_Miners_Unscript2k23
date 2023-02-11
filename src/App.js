@@ -48,6 +48,15 @@ function App() {
 				</>
 			),
 		},
+		{
+			path: "/productlList",
+			element: (
+				<>
+					{/* <Navbar /> */}
+					<Products />
+				</>
+			),
+		},
 	]);
 
 	return (
