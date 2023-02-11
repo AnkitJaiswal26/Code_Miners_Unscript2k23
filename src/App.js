@@ -59,14 +59,24 @@ function App() {
 			),
 		},
 		{
+			path: "/productlList",
+			element: (
+				<>
+					<Navbar />
+					<Products />
+				</>
+			),
+		},
+		{
+
 			path: "/admin",
 			element: (
 				<>
 					<Navbar />
 					<Admin />
 				</>
-			),
-		},
+			)
+		}
 	]);
 
 	return (
