@@ -81,7 +81,7 @@ export const SupplyChainProvider = ({ children }) => {
 		name,
 		emailId,
 		mobileNo,
-		gender,
+		// gender,
 		age
 	) => {
 		const contract = await connectingWithSmartContract();
@@ -97,7 +97,7 @@ export const SupplyChainProvider = ({ children }) => {
 			name,
 			emailId,
 			mobileNo,
-			gender,
+			// gender,
 			age,
 		]);
 
