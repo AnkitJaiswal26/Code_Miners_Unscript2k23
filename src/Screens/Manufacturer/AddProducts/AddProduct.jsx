@@ -77,7 +77,7 @@ const AddProduct = () => {
 
 	useEffect(() => {
 		if (currentAccount) fetchUser();
-		if (companyNFTAdd) fetchProducts();
+		// if (companyNFTAdd) fetchProducts();
 	}, [currentAccount, companyNFTAdd]);
 
 	const [products, setProducts] = useState([]);

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../../Context/AuthContext";
 import { useSupplyChainContext } from "../../../Context/SupplyChainContext";
+import styles from './Products.module.css'
 
 const Products = () => {
 	const [products, setProducts] = useState([]);
@@ -67,7 +68,7 @@ const Products = () => {
 
 		console.log(res);
 		setProducts(res);
-		console.log(res);
+		console.log(res, "ppppppppppp");
 	});
 
 	useEffect(() => {
@@ -80,10 +81,103 @@ const Products = () => {
 	return (
 		<div style={{ margin: "auto", justifyContent: "space-around" }}>
 			<div className="">
-				<div className="text-center text-2xl font-bold mt-4 mb-2">
-					Previous Jobs
+				<div className="text-center text-2xl font-bold mt-4 mb-6">
+					Company Details
 				</div>
-				<div
+				<div className="mx-28 border rounded">
+					<div class="px-6 py-4 w-3/5">
+						<div class="font-medium text-xl mb-4">
+							Company Name: {compData ? compData[1] : ""}
+						</div>
+						<hr />
+						<div class="font-medium text-xl mt-2 mb-4">
+							Company cin: {compData ? compData[2] : ""}
+						</div>
+						<hr />
+					</div>
+				</div>
+				<div className="text-center text-2xl font-bold mt-4 mb-6">
+					Product Details
+				</div>
+				{products.length > 0 ? (
+					<>
+						<div style={{ width: "85%", marginTop: "40px", margin: "auto", justifyContent: "space-around" }} className={styles.docCardHeader}>
+							<span className={styles.docCardContent}>
+								Product Name
+							</span>
+							<span className={styles.docCardContent}>
+								Price
+							</span>
+							<span className={styles.docCardContent}>
+								Count
+							</span>
+							<span className={styles.docCardContent}>
+								Add Product
+							</span>
+						</div>
+						{products.map((item, index) => {
+							return (
+								<div
+									style={{ width: "85%", margin: "auto", justifyContent: "space-around" }}
+									className={
+										index % 2 == 0
+											? `${styles.docCard} ${styles.evenDocCard}`
+											: `${styles.docCard} ${styles.oddDocCard}`
+									}
+									key={index}
+								>
+									<span
+										className={
+											styles.docCardContent
+										}
+									>
+										{item.name}
+									</span>
+									<span
+										className={
+											styles.docCardContent
+										}
+									>
+										{item.price.toNumber()}
+									</span>
+									<span
+										className={
+											styles.docCardContent
+										}
+									>
+										{item.count}
+									</span>
+									<span
+										className={
+											styles.docCardContent
+										}
+									>
+										<button
+											className={
+												styles.viewAllBtn
+											}
+											onClick={(e) => {
+												navigate(
+													`/addItems/${companyNFTAdd}/${item.productId}`
+												);
+											}}
+										>
+											Add
+										</button>
+									</span>
+								</div>
+							);
+						})}
+					</>
+				) : (
+					<span className={styles.emptyListMessage}>
+						No response found
+					</span>
+				)}
+
+
+
+				{/* <div
 					style={{
 						display: "flex",
 						flexWrap: "wrap",
@@ -138,7 +232,7 @@ const Products = () => {
 							</div>
 						);
 					})}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

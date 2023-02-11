@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as xlsx from "xlsx";
 import template from "../../../images/template.jpg";
 import ProductCanvas from "../Products/ProductCanvas";
+
 const AddProductItem = () => {
 	const [products, setProducts] = useState([]);
 	const [productDetails, setProductDetails] = useState({});
@@ -179,7 +180,60 @@ const AddProductItem = () => {
 				<div className="text-center text-2xl font-bold mt-4 mb-2">
 					Previous Jobs
 				</div>
-				<div
+
+				<div className="flex justify-evenly mx-10 my-5">
+					<div>
+						<img
+							src="/logo192.png"
+							width={270}
+							height={270}
+							alt="Logo"
+							onClick={(e) => {
+								navigate("/");
+							}}
+						/>
+					</div>
+					<div class="px-6 py-4 w-3/5">
+						<div class="font-bold text-xl mb-3">
+							Product Name: {productDetails.name}
+						</div>
+						<p class="text-gray-700 text-base mb-3">
+							Product Description: {productDetails.description}
+						</p>
+						<p class="font-bold text-lg mb-3">
+							Price:{" "}
+							{productDetails.price
+								? productDetails.price.toNumber()
+								: ""}
+						</p>
+						<p class="font-bold text-lg mb-3">
+							Items: {productItems.length}
+						</p>
+
+						<div style={{width: "230px"}} className="flex mt-8 justify-between">
+							<input
+								type="number"
+								value={quantity}
+								onChange={(e) =>
+									setQuantity(e.target.value)
+								}
+								class="shadow text-center appearance-none border rounded w-24 h-10 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" placeholder="Username" />
+
+							<button
+								type="button"
+								className="mb-6 inline-block px-10 py-3 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
+								style={{
+									backgroundColor: "#22a6c7",
+								}}
+								onClick={addNewItems}
+							>
+								Add
+							</button>
+						</div>
+					</div>
+
+				</div>
+				{/* <div
 					style={{
 						display: "flex",
 						flexWrap: "wrap",
@@ -215,6 +269,7 @@ const AddProductItem = () => {
 									Items: {productItems.length}
 								</p>
 							</div>
+							
 							<div className="flex justify-center mt-2">
 								<input
 									type="text"
@@ -237,7 +292,8 @@ const AddProductItem = () => {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
+
 				<div className="">
 					{Array(parseInt(quantity))
 						.fill(0)
