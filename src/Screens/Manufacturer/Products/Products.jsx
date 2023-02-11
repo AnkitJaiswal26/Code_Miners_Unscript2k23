@@ -6,6 +6,7 @@ import { useSupplyChainContext } from "../../../Context/SupplyChainContext";
 import { v4 as uuidv4 } from "uuid";
 import * as xlsx from "xlsx";
 import template from "../../../images/template.png";
+import ProductCanvas from "./ProductCanvas";
 
 const Products = () => {
 	const [products, setProducts] = useState([]);
@@ -25,7 +26,7 @@ const Products = () => {
 		fetchCompanyByAddress,
 		fetchCompanyNFTAddress,
 		addBulkProducts,
-		fetchAllProductItemsByProductId,
+		fetchProductItemsByProductId,
 		uploadFilesToIPFS,
 		fetchAllProducts,
 		addProduct,
@@ -54,16 +55,19 @@ const Products = () => {
 		console.log("Hell");
 		const result = await fetchAllProducts(companyNFTAdd);
 		console.log(result);
+
 		var res = [];
 		for (let i = 0; i < result.length; i++) {
-			// const data = await fetchAllProductItemsByProductId(
-			// 	companyNFTAdd,
-			// 	result[i].productId
-			// );
+			const data = await fetchProductItemsByProductId(
+				companyNFTAdd,
+				result[i].productId
+			);
+
+			console.log(data);
 
 			res.push({
 				name: result[i].name,
-				// count: data.length,
+				count: data.length,
 				productId: result[i].productId,
 				price: result[i].price,
 			});
@@ -79,13 +83,13 @@ const Products = () => {
 		context.drawImage(img, 0, 0, width, height);
 		context.font = "28px Arial";
 		context.fillStyle = "red";
-		context.fillText(entry.productDetails.name, 300, 225);
+		// context.fillText(entry.productDetails.name, 300, 225);
 		context.fillText(entry.compData.name, 300, 272);
 		context.fillText(entry.compData.cin, 300, 318);
-		context.fillText(`₹${entry.productDetails.price.toNumber()}`, 300, 364);
-		context.fillText(entry.manufDate, 300, 414);
-		context.fillText(entry.expiryDate, 300, 460);
-		context.fillText(`${entry.validity} years`, 360, 740);
+		// context.fillText(`₹${entry.productDetails.price.toNumber()}`, 300, 364);
+		// context.fillText(entry.manufDate, 300, 414);
+		// context.fillText(entry.expiryDate, 300, 460);
+		// context.fillText(`${entry.validity} years`, 360, 740);
 	};
 
 	const addNewItems = async (e, productId, price) => {
@@ -96,6 +100,8 @@ const Products = () => {
 			var tokenURI = [];
 
 			const codesURLList = [];
+
+			console.log(quantity);
 
 			for (let i = 0; i < quantity; i++) {
 				console.log("Hello");
@@ -164,6 +170,8 @@ const Products = () => {
 		if (companyNFTAdd) fetchProducts();
 	}, [currentAccount, companyNFTAdd]);
 
+	const navigate = useNavigate();
+
 	return (
 		<div style={{ margin: "auto", justifyContent: "space-around" }}>
 			<div className="">
@@ -185,6 +193,9 @@ const Products = () => {
 									<img
 										src="/logo192.png"
 										alt="Logo"
+										onClick={(e) => {
+											navigate("/");
+										}}
 										style={{ margin: "auto" }}
 									/>
 									;
@@ -197,6 +208,9 @@ const Products = () => {
 										</p>
 										<p class="font-bold text-lg mb-2">
 											Price: {item.price.toNumber()}
+										</p>
+										<p class="font-bold text-lg mb-2">
+											Items: {item.count}
 										</p>
 									</div>
 									<div className="flex justify-center mt-2">
@@ -222,7 +236,7 @@ const Products = () => {
 												backgroundColor: "#22a6c7",
 											}}
 										>
-											Buy
+											Add
 										</button>
 									</div>
 								</div>
@@ -230,9 +244,27 @@ const Products = () => {
 						);
 					})}
 				</div>
+				<div className="">
+					{Array(parseInt(quantity))
+						.fill(0)
+						.map((_, index) => {
+							return (
+								<ProductCanvas
+									key={index}
+									entry={{
+										// productDetails: productDetails,
+										compData: compData,
+									}}
+									draw={draw}
+									height={900}
+									width={700}
+								/>
+							);
+						})}
+				</div>
 				<img
 					id="templateImage"
-					style={{}}
+					style={{ display: "none" }}
 					height={900}
 					width={700}
 					src={template}

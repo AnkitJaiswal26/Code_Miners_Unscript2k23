@@ -11,7 +11,6 @@ contract SupplyChain {
         address userAdd;
         string name;
         uint256 age;
-        bool gender;
         string email;
         string mobileNo;
     }
@@ -64,17 +63,9 @@ contract SupplyChain {
         string memory name,
         string memory emailId,
         string memory mobileNo,
-        bool gender,
         uint256 age
     ) public {
-        userMapping[userCount] = User(
-            userAdd,
-            name,
-            age,
-            gender,
-            emailId,
-            mobileNo
-        );
+        userMapping[userCount] = User(userAdd, name, age, emailId, mobileNo);
 
         userAddressToIdMapping[msg.sender] = userCount++;
     }
@@ -245,45 +236,45 @@ contract SupplyChain {
         return result;
     }
 
-    function fetchAllCompanies()
-        public
-        view
-        isOwner
-        returns (Company[] memory)
-    {
-        Company[] memory result = new Company[](companyCount);
-        for (uint256 i = 0; i < companyCount; i++) {
-            Company storage cur = companyMapping[i];
-            result[i] = cur;
-        }
-
-        return result;
-    }
-
-    function fetchCompanyUsingCIN(
-        string memory cin
-    ) public view returns (Company memory) {
-        for (uint256 i = 0; i < companyCount; i++) {
-            if (
-                keccak256(abi.encodePacked(companyMapping[i].cin)) ==
-                keccak256(abi.encodePacked(cin))
-            ) {
-                return companyMapping[i];
-            }
-        }
-
-        revert();
-    }
-
-    // function fetchAllCompaniesNFT() public view returns (address[] memory) {
-    //     address[] memory result = new address[](companyCount);
+    // function fetchAllCompanies()
+    //     public
+    //     view
+    //     isOwner
+    //     returns (Company[] memory)
+    // {
+    //     Company[] memory result = new Company[](companyCount);
     //     for (uint256 i = 0; i < companyCount; i++) {
-    //         address cur = address(companyNFTMapping[i]);
+    //         Company storage cur = companyMapping[i];
     //         result[i] = cur;
     //     }
 
     //     return result;
     // }
+
+    // function fetchCompanyUsingCIN(
+    //     string memory cin
+    // ) public view returns (Company memory) {
+    //     for (uint256 i = 0; i < companyCount; i++) {
+    //         if (
+    //             keccak256(abi.encodePacked(companyMapping[i].cin)) ==
+    //             keccak256(abi.encodePacked(cin))
+    //         ) {
+    //             return companyMapping[i];
+    //         }
+    //     }
+
+    //     revert();
+    // }
+
+    function fetchAllCompaniesNFT() public view returns (address[] memory) {
+        address[] memory result = new address[](companyCount);
+        for (uint256 i = 0; i < companyCount; i++) {
+            address cur = address(companyNFTMapping[i]);
+            result[i] = cur;
+        }
+
+        return result;
+    }
 
     function fetchCompanyNFTAddress(
         address companyAddr
