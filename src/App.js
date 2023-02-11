@@ -15,6 +15,8 @@ import ProductList from "./Screens/Seller/Products/ProductList";
 import Purchase from "./Screens/Manufacturer/CurrentPurchase/Purchase";
 import HomeScreen from "./Screens/Home/HomeScreen";
 import AddProductItem from "./Screens/Manufacturer/AddProductItem/AddProductItem";
+import AddProductItemForSeller from "./Screens/Seller/AddProductItemForSeller/AddProductItem";
+import VerifyPage from "./Screens/Buyer/Verify/Verify";
 
 function App() {
 	const router = createBrowserRouter([
@@ -50,6 +52,25 @@ function App() {
 				<>
 					<Navbar />
 					<AddProduct />
+				</>
+			),
+		},
+		{
+			path: "/verify/:nft/:token",
+			element: (
+				<>
+					<Navbar />
+					<VerifyPage />
+				</>
+			),
+		},
+
+		{
+			path: "/seller/:nft/:id",
+			element: (
+				<>
+					<Navbar />
+					<AddProductItemForSeller />
 				</>
 			),
 		},

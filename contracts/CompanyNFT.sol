@@ -156,11 +156,11 @@ contract CompanyNFT is ERC721URIStorage {
         State state
     ) private {
         require(
-            items[tokenId].itemState == State.Received,
+            items[tokenId].itemState != State.Received,
             "It id impossible to grow more"
         );
 
-        _setTokenURI(tokenId, tokenURI);
+        // _setTokenURI(tokenId, tokenURI);
 
         if (state == State.SellerRecieved) {
             items[tokenId].retailerAdd = payable(msg.sender);
@@ -200,12 +200,13 @@ contract CompanyNFT is ERC721URIStorage {
         string memory tokenURI
     ) public payable {
         uint256 totalItemCount = _tokenIds.current();
-        for (uint256 i = 0; i < totalItemCount && count > 0; i++) {
+        for (uint256 i = 1; i < totalItemCount + 1 && count > 0; i++) {
             if (
                 items[i].productID == productId &&
                 items[i].itemState == State.Manufactured
             ) {
                 buyProductForSeller(i, tokenURI);
+                count -= 1;
             }
         }
     }
@@ -287,7 +288,7 @@ contract CompanyNFT is ERC721URIStorage {
         uint256 totalCount = _tokenIds.current();
 
         uint256 proCount;
-        for (uint256 i = 0; i < totalCount; i++) {
+        for (uint256 i = 1; i < totalCount + 1; i++) {
             if (items[i].ownerID == msg.sender) {
                 proCount += 1;
             }
@@ -296,7 +297,7 @@ contract CompanyNFT is ERC721URIStorage {
         ProductItem[] memory result = new ProductItem[](proCount);
         proCount = 0;
 
-        for (uint256 i = 0; i < totalCount; i++) {
+        for (uint256 i = 1; i < totalCount + 1; i++) {
             if (items[i].ownerID == msg.sender) {
                 ProductItem storage cur = items[i];
                 result[proCount++] = cur;
@@ -337,7 +338,7 @@ contract CompanyNFT is ERC721URIStorage {
         uint256 totalCount = _tokenIds.current();
 
         uint256 proCount;
-        for (uint256 i = 0; i < totalCount; i++) {
+        for (uint256 i = 1; i <= totalCount; i++) {
             if (items[i].productID == productId) {
                 proCount += 1;
             }
@@ -346,7 +347,7 @@ contract CompanyNFT is ERC721URIStorage {
         ProductItem[] memory result = new ProductItem[](proCount);
         proCount = 0;
 
-        for (uint256 i = 0; i < totalCount; i++) {
+        for (uint256 i = 1; i <= totalCount; i++) {
             if (items[i].productID == productId) {
                 ProductItem storage cur = items[i];
                 result[proCount++] = cur;
