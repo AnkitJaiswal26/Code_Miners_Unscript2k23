@@ -23,7 +23,7 @@ const ProductCard = () => {
                 <div className='flex mt-2 justify-around '>
                     <div className='text-xl font-medium'>
                         <button className='px-2 py-2'>-</button>
-                        {buyCount}
+                        {/* {buyCount} */}
                         <button className='px-2 py-2'>+</button>
                     </div>
 

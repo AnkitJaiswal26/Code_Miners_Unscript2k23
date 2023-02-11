@@ -12,6 +12,7 @@ import Home from "./Screens/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
 import Admin from "./Screens/Admin/Admin";
 import ProductList from "./Screens/Seller/Products/ProductList";
+import Purchase from "./Screens/Manufacturer/CurrentPurchase/Purchase";
 
 function App() {
 	const router = createBrowserRouter([
@@ -75,6 +76,16 @@ function App() {
 				<>
 					<Navbar />
 					<Admin />
+				</>
+			)
+		},
+		{
+
+			path: "/purchased",
+			element: (
+				<>
+					<Navbar />
+					<Purchase />
 				</>
 			)
 		}

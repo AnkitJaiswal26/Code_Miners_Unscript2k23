@@ -12,8 +12,6 @@ const Products = () => {
                    <ProductCard/> 
                    <ProductCard/> 
                    <ProductCard/> 
-                   
-
                 </div>
             </div>
         </div>
