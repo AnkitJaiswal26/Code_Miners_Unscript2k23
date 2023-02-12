@@ -179,7 +179,7 @@ const AddProductItemForSeller = () => {
 								}}
 								style={{ margin: "auto" }}
 							/>
-							;
+							
 							<div class="px-6 py-4">
 								<div class="font-bold text-xl mb-2">
 									{productDetails.name}
@@ -197,26 +197,26 @@ const AddProductItemForSeller = () => {
 									Items: {productItems.length}
 								</p>
 							</div>
-							<div className="flex justify-center mt-2">
-								<input
-									type="number"
-									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-									value={quantity}
-									onChange={(e) =>
-										setQuantity(e.target.value)
-									}
-								/>
-								<button
-									type="button"
-									className="mb-6 inline-block px-16 py-3 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
-									style={{
-										backgroundColor: "#22a6c7",
-									}}
-									onClick={buyProductItems}
-								>
-									Add
-								</button>
-							</div>
+							<div style={{width: "230px"}} className="flex  ml-6 justify-between">
+							<input
+								type="number"
+								value={quantity}
+								onChange={(e) =>
+									setQuantity(e.target.value)
+								}
+								class="shadow text-center appearance-none border rounded w-24 h-10 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" placeholder="Username" />
+
+							<button
+								type="button"
+								className="mb-6 inline-block px-10 py-3 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
+								style={{
+									backgroundColor: "#22a6c7",
+								}}
+								onClick={buyProductItems}
+							>
+								Add
+							</button>
+						</div>
 						</div>
 					</div>
 				</div>
