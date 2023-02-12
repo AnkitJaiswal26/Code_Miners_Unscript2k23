@@ -49,18 +49,12 @@ const UserDashboard = () => {
 
 				console.log(temp);
 				for (let j = 0; j < temp.length; j++) {
-					const data = await fetchProductItemsByProductId(
-						companies[i],
-						temp[j].productId
+					const data = await fetchAllUserProducts(
+						companies[i]
 					);
 					console.log(data);
 					for (let k = 0; k < data.length; k++) {
-						if (
-							data[k].ownerID ===
-							"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"
-						) {
-							result.push(data[k]);
-						}
+						result.push(data[k]);
 					}
 				}
 			}
