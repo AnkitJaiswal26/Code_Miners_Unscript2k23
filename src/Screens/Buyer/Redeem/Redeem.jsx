@@ -187,15 +187,15 @@ const Redeem = () => {
 								</span>
 							</span>
 							<span className={styles.verifyDetails}>
-								Manufacture Date:{" "}
+								Price:{" "}
 								<span className={styles.detailsContent}>
-									{product.manDate}
+									{product.price.toNumber()}
 								</span>
 							</span>
 							<span className={styles.verifyDetails}>
-								Expiry Date:{" "}
+								Price:{" "}
 								<span className={styles.detailsContent}>
-									{product.exDate}
+									{product.itemState}
 								</span>
 							</span>
 							<button

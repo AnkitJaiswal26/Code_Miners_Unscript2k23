@@ -149,7 +149,7 @@ const VerifyPage = () => {
 									<span className={styles.verifyDetails}>
 										Product Name:{" "}
 										<span className={styles.detailsContent}>
-											{item.productName}
+											{item.name}
 										</span>
 									</span>
 									<span className={styles.verifyDetails}>
@@ -165,15 +165,15 @@ const VerifyPage = () => {
 										</span>
 									</span>
 									<span className={styles.verifyDetails}>
-										Manufacture Date:{" "}
+										Price:{" "}
 										<span className={styles.detailsContent}>
-											{item.manDate}
+											{item.price.toNumber()}
 										</span>
 									</span>
 									<span className={styles.verifyDetails}>
-										Expiry Date:{" "}
+										Price:{" "}
 										<span className={styles.detailsContent}>
-											{item.exDate}
+											{item.state}
 										</span>
 									</span>
 
