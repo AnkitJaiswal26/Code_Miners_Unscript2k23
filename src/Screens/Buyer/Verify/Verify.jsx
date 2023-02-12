@@ -178,6 +178,7 @@ const VerifyPage = () => {
 									</span>
 
 									<button
+									className={styles.checkProductBtn}
 										onClick={(e) => {
 											e.preventDefault();
 											if (

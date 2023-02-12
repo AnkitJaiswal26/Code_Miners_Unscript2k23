@@ -5,7 +5,7 @@ const ProductCard = () => {
     return (
         <div class="mx-10 my-5">
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <img src="/logo192.png" alt="Logo" style={{ margin: "auto" }} />;
+                <img src="/logo192.png" alt="Logo" style={{ margin: "auto" }} />
                 <div class="px-6 py-4">
                     <div class="font-bold text-xl mb-2">boAt Rockerz 255 Pro</div>
                     <p class="text-gray-700 text-base mb-2">

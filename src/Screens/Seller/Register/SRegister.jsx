@@ -26,9 +26,7 @@ const SRegister = () => {
 	const fetchUser = useCallback(async () => {
 		try {
 			const company = await fetchSellerByAddress(currentAccount);
-			if (company.cin !== "") {
-				navigate("/companyDashboard");
-			}
+			navigate("/productsList")
 		} catch (err) {}
 	});
 
