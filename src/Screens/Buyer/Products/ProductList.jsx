@@ -8,18 +8,11 @@ import { useAuth } from "../../../Context/AuthContext";
 import { useSupplyChainContext } from "../../../Context/SupplyChainContext";
 import ProductCanvas from "../../Manufacturer/Products/ProductCanvas";
 import template from "../../../images/template.png";
+import styles from "./ProductList.module.css";
 
-const ProductList = () => {
-	const [buyCount, setBuyCount] = useState(0);
-
+const UserProductList = () => {
 	const [products, setProducts] = useState([]);
-
-	const [companyNFTAdd, setCompanyNFTAdd] = useState("");
-
 	const [userData, setUserData] = useState();
-
-	const [quantity, setQuantity] = useState(0);
-
 	const { checkIfWalletConnected, currentAccount } = useAuth();
 
 	useEffect(() => {
@@ -27,10 +20,7 @@ const ProductList = () => {
 	}, [currentAccount]);
 
 	const {
-		fetchSellerByAddress,
-		buyBulkProductsForSeller,
 		fetchProductItemsByProductId,
-		uploadFilesToIPFS,
 		fetchAllProducts,
 		fetchAllCompaniesNFT,
 		fetchCompanyDetails,
@@ -64,22 +54,32 @@ const ProductList = () => {
 						result[j].productId
 					);
 
+					console.log(data);
+
 					var count = 0;
 					for (let k = 0; k < data.length; k++) {
-						if (data[i].itemState == 0) {
+						if (data[k].itemState === 4) {
 							count += 1;
 						}
 					}
 
+					console.log(count);
+
 					const compData = await fetchCompanyDetails(nfts[i]);
 
 					res.push({
+						nft: nfts[i],
 						name: result[j].name,
 						comp: compData,
 						count: count,
 						productId: result[j].productId,
 						price: result[j].price,
+						description: result[j].description,
 					});
+
+					console.log("---------------------");
+					console.log(nfts[i]);
+					console.log("---------------------");
 				}
 		}
 		setProducts(res);
@@ -92,57 +92,6 @@ const ProductList = () => {
 		}
 		if (products.length === 0) fetchProducts();
 	}, [currentAccount]);
-
-	const draw = async (context, entry, height, width) => {
-		var img = document.getElementById("templateImage");
-		context.drawImage(img, 0, 0, width, height);
-		context.font = "28px Arial";
-		context.fillStyle = "red";
-	};
-
-	const buyProductItems = async (e, productId, price, compData) => {
-		e.preventDefault();
-		try {
-			var canvases = document.getElementsByClassName("templateCanvas");
-			console.log(canvases);
-
-			var qualities = [];
-			var cids = [];
-
-			for (let i = 0; i < canvases.length; i++) {
-				var url = canvases[i].toDataURL("image/png");
-
-				let file = dataURLtoFile(url, "warranty.png");
-				const cid = await uploadFilesToIPFS([file]);
-				console.log(cid);
-				cids.push(cid);
-				qualities.push("Good");
-			}
-
-			await buyBulkProductsForSeller(
-				companyNFTAdd,
-				productId,
-				buyCount,
-				cids
-			);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	function dataURLtoFile(dataurl, filename) {
-		var arr = dataurl.split(","),
-			mime = arr[0].match(/:(.*?);/)[1],
-			bstr = atob(arr[1]),
-			n = bstr.length,
-			u8arr = new Uint8Array(n);
-
-		while (n--) {
-			u8arr[n] = bstr.charCodeAt(n);
-		}
-
-		return new File([u8arr], filename, { type: mime });
-	}
 
 	const navigate = useNavigate();
 
@@ -160,110 +109,92 @@ const ProductList = () => {
 						justifyContent: "center",
 					}}
 				>
-					{products &&
-						products.map((item, index) => {
-							return (
-								<div class="mx-10 my-5">
-									<div class="max-w-sm rounded overflow-hidden shadow-lg">
-										<img
-											src="/logo192.png"
-											alt="Logo"
-											style={{ margin: "auto" }}
-										/>
-										;
-										<div class="px-6 py-4">
-											<div class="font-bold text-xl mb-2">
-												{item.name}
-											</div>
-											<p class="text-gray-700 text-base mb-2">
-												Wireless Neckband with 10mm
-												Drivers, Upto 8Hrs Uninterrupted
-												Music, Made in India, Ergonomic
-												and comfortable.
-											</p>
-											<p class="font-bold text-lg mb-2">
-												Price: {item.price.toNumber()}
-											</p>
-											<p class="font-bold text-lg mb-2">
-												Quantity: {item.count}
-											</p>
-											<p class="font-bold text-lg mb-2">
-												Company: {item.comp[1]}
-											</p>
-										</div>
-										<div className="flex mt-2 justify-around ">
-											<div className="text-xl font-medium">
-												<button
-													className="px-2 py-2"
-													onClick={(e) =>
-														setBuyCount(
-															buyCount - 1
-														)
-													}
-												>
-													-
-												</button>
-												{buyCount}
-												<button
-													className="px-2 py-2"
-													onClick={(e) =>
-														setBuyCount(
-															buyCount + 1
-														)
-													}
-												>
-													+
-												</button>
-											</div>
-
+					{products.length > 0 ? (
+						<>
+							<div
+								style={{
+									width: "85%",
+									marginTop: "40px",
+									margin: "auto",
+									justifyContent: "space-around",
+								}}
+								className={styles.docCardHeader}
+							>
+								<span className={styles.docCardContent}>
+									Product Name
+								</span>
+								<span className={styles.docCardContent}>
+									Product Description
+								</span>
+								<span className={styles.docCardContent}>
+									Price
+								</span>
+								<span className={styles.docCardContent}>
+									Count
+								</span>
+								<span className={styles.docCardContent}>
+									Company
+								</span>
+								<span className={styles.docCardContent}>
+									Buy
+								</span>
+							</div>
+							{products.map((item, index) => {
+								return (
+									<div
+										style={{
+											width: "85%",
+											margin: "auto",
+											justifyContent: "space-around",
+										}}
+										className={
+											index % 2 == 0
+												? `${styles.docCard} ${styles.evenDocCard}`
+												: `${styles.docCard} ${styles.oddDocCard}`
+										}
+										key={index}
+									>
+										<span className={styles.docCardContent}>
+											{item.name}
+										</span>
+										<span className={styles.docCardContent}>
+											{item.description}
+										</span>
+										<span className={styles.docCardContent}>
+											{item.price.toNumber()}
+										</span>
+										<span className={styles.docCardContent}>
+											{item.count}
+										</span>
+										<span className={styles.docCardContent}>
+											{item.comp[1]}
+										</span>
+										<span className={styles.docCardContent}>
 											<button
-												type="button"
-												className="mb-6 inline-block px-16 py-3 text-white font-medium text-base leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
-												style={{
-													backgroundColor: "#22a6c7",
-												}}
+												className={styles.viewAllBtn}
 												onClick={(e) => {
-													buyProductItems(
-														e,
-														item.productId,
-														item.price,
-														item.compData
+													// console.log(item);
+													navigate(
+														`/user/${item.nft}/${item.productId}`
 													);
 												}}
 											>
 												Buy
 											</button>
-										</div>
-										<div className="">
-											{Array(parseInt(buyCount))
-												.fill(0)
-												.map((_, index) => {
-													return (
-														<ProductCanvas
-															key={index}
-															entry={{}}
-															draw={draw}
-															height={900}
-															width={700}
-														/>
-													);
-												})}
-										</div>
-										<img
-											id="templateImage"
-											style={{ display: "none" }}
-											height={900}
-											width={700}
-											src={template}
-										/>
+										</span>
 									</div>
-								</div>
-							);
-						})}
+								);
+							})}
+						</>
+					) : (
+						<span className={styles.emptyListMessage}>
+							No response found
+						</span>
+					)}
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default ProductList;
+export default UserProductList;

@@ -18,6 +18,9 @@ import AddProductItem from "./Screens/Manufacturer/AddProductItem/AddProductItem
 import AddProductItemForSeller from "./Screens/Seller/AddProductItemForSeller/AddProductItem";
 import VerifyPage from "./Screens/Buyer/Verify/Verify";
 import Redeem from "./Screens/Buyer/Redeem/Redeem";
+import UserProductList from "./Screens/Buyer/Products/ProductList";
+import AddProductItemForUser from "./Screens/Buyer/AddProductItemForSeller/AddProductItem";
+import UserDashboard from "./Screens/Buyer/Dashboard/Dashboard";
 
 function App() {
 	const router = createBrowserRouter([
@@ -67,11 +70,40 @@ function App() {
 		},
 
 		{
+			path: "/userDashboard",
+			element: (
+				<>
+					<Navbar />
+					<UserDashboard />
+				</>
+			),
+		},
+
+		{
+			path: "/user/products",
+			element: (
+				<>
+					<Navbar />
+					<UserProductList />
+				</>
+			),
+		},
+
+		{
 			path: "/seller/:nft/:id",
 			element: (
 				<>
 					<Navbar />
 					<AddProductItemForSeller />
+				</>
+			),
+		},
+		{
+			path: "/user/:nft/:id",
+			element: (
+				<>
+					<Navbar />
+					<AddProductItemForUser />
 				</>
 			),
 		},

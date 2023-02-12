@@ -110,7 +110,7 @@ const VerifyPage = () => {
 			const cid = await uploadFilesToIPFS([file]);
 			console.log(cid);
 
-			await scanAndGrow(nft, pubKey, cid);
+			await scanAndGrow(nft, pubKey, cid, productItem.itemState + 1);
 		} else {
 			await scanAndGrow(
 				nft,
@@ -178,13 +178,14 @@ const VerifyPage = () => {
 									</span>
 
 									<button
-									className={styles.checkProductBtn}
+										className={styles.checkProductBtn}
 										onClick={(e) => {
 											e.preventDefault();
 											if (
 												productItem.itemState === 1 ||
 												productItem.itemState === 2 ||
 												productItem.itemState === 3 ||
+												productItem.itemState === 4 ||
 												productItem.itemState === 5
 											) {
 												handleUpdate();

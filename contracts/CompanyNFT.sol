@@ -168,7 +168,7 @@ contract CompanyNFT is ERC721URIStorage {
             items[tokenId].distributorAdd = payable(msg.sender);
         }
 
-        if (state == State.SoldToSeller && state == State.Sold) {
+        if (state == State.SoldToSeller || state == State.Sold) {
             items[tokenId].ownerID = payable(msg.sender);
         }
 
@@ -199,6 +199,8 @@ contract CompanyNFT is ERC721URIStorage {
         uint256 count,
         string memory tokenURI
     ) public payable {
+        require(msg.value >= (count * productsMapping[productId].price) / 1000);
+        payable(company).transfer(msg.value);
         uint256 totalItemCount = _tokenIds.current();
         for (uint256 i = 1; i < totalItemCount + 1 && count > 0; i++) {
             if (
@@ -215,6 +217,10 @@ contract CompanyNFT is ERC721URIStorage {
         uint256 itemId,
         string memory cid
     ) public payable {
+        require(
+            msg.value >= productsMapping[items[itemId].productID].price / 1000
+        );
+        payable(items[itemId].ownerID).transfer(msg.value);
         growNFT(itemId, cid, State.Sold);
     }
 

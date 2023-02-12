@@ -1,7 +1,7 @@
 import supplyChain from "../artifacts/contracts/SupplyChain.sol/SupplyChain.json";
 import companyNFT from "../artifacts/contracts/CompanyNFT.sol/CompanyNFT.json";
 
-export const SupplyChainAddress = "0xE9082f042a1e3b214397C0c9BF8A5C217B70c23f";
+export const SupplyChainAddress = "0x82FA15698f2c16ff2b5afe3740170f4c88F231ED";
 export const SupplyChainABI = supplyChain.abi;
 export const CompanyNFTABI = companyNFT.abi;
 
